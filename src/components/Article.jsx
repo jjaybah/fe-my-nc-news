@@ -1,19 +1,25 @@
 import { Link, useParams } from "react-router";
 import { fetchArticleById } from "../utils/api";
 import { useEffect, useState } from "react";
+import CommentsList from "./CommentsList";
 import moment from "moment";
 
 const Article = () => {
   const [article, setArticle] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const { article_id } = useParams();
 
   useEffect(() => {
+    setIsLoading(true);
     fetchArticleById(article_id).then((article) => {
+      setIsLoading(false);
       setArticle(article);
     });
   }, [article_id]);
 
-  return (
+  return isLoading ? (
+    <p>Loading</p>
+  ) : (
     <div className="article__container">
       <h1>{article.title}</h1>
       <Link className="header__tag" to={`/articles?topic=${article.topic}`}>
@@ -33,6 +39,7 @@ const Article = () => {
         <p>{article.comment_count} comments</p>
         <p>{article.votes} votes</p>
       </div>
+      <CommentsList article_id={article.article_id} key={article.article_id} />
     </div>
   );
 };

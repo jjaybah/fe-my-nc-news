@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router";
 import Header from "./components/Header";
 import Articles from "./components/Articles";
 import Article from "./components/Article";
-import { useState } from "react";
 
 function App() {
   return (
