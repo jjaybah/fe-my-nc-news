@@ -5,12 +5,11 @@ import Articles from "./components/Articles";
 import { useState } from "react";
 
 function App() {
-  const [topic, setTopic] = useState("");
   return (
     <>
-      <Header setTopic={setTopic} topic={topic} />
+      <Header />
       <Routes>
-        <Route path="/articles" element={<Articles topic={topic} />} />
+        <Route path="/articles" element={<Articles />} />
       </Routes>
     </>
   );

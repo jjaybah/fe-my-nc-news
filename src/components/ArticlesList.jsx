@@ -7,11 +7,9 @@ export default function ArticlesList({ articles }) {
       <div className="articles__grid">
         {articles.map((article) => {
           return (
-            <>
-              <ul key={article.article_id} className="articles__container">
-                <ArticleCard article={article} />
-              </ul>
-            </>
+            <ul key={article.article_id} className="articles__container">
+              <ArticleCard article={article} />
+            </ul>
           );
         })}
       </div>

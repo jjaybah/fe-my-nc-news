@@ -1,10 +1,6 @@
 import { Link } from "react-router";
 
-function Header({ topic, setTopic }) {
-  const handleClick = (e) => {
-    setTopic(e.target.name);
-  };
-  console.log(topic, "topic in header after set");
+function Header() {
   return (
     <>
       <header className="header">
@@ -17,42 +13,22 @@ function Header({ topic, setTopic }) {
           />
           <ul className="nav__list">
             <li className="nav__link">
-              <Link
-                className="nav__link"
-                to="/articles"
-                onClick={handleClick}
-                name=""
-              >
+              <Link className="nav__link" to="/articles">
                 All News
               </Link>
             </li>
             <li className="nav__link">
-              <Link
-                className="nav__link"
-                to="/articles?topic=coding"
-                onClick={handleClick}
-                name="coding"
-              >
+              <Link className="nav__link" to="/articles?topic=coding">
                 Coding
               </Link>
             </li>
             <li className="nav__link">
-              <Link
-                className="nav__link"
-                to="/articles?topic=football"
-                onClick={handleClick}
-                name="football"
-              >
+              <Link className="nav__link" to="/articles?topic=football">
                 Football
               </Link>
             </li>
             <li className="nav__link">
-              <Link
-                className="nav__link"
-                to="/articles?topic=cooking"
-                onClick={handleClick}
-                name="cooking"
-              >
+              <Link className="nav__link" to="/articles?topic=cooking">
                 Cooking
               </Link>
             </li>
