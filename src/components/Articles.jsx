@@ -26,7 +26,11 @@ function Articles() {
   }, [topic]);
 
   return isLoading ? (
-    <p>Loading...</p>
+    isErr ? (
+      <p>Loading...</p>
+    ) : (
+      <p>Error</p>
+    )
   ) : (
     <>
       <ArticlesList articles={articles} />

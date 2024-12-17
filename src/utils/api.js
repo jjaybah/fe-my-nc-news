@@ -9,9 +9,7 @@ export const fetchArticles = async (topic) => {
   if (topic) {
     url = `/articles?topic=${topic}`;
   }
-  console.log(url, "url");
 
   const articles = await ncNewsApi.get(url);
-  console.log(articles, "articles in api");
   return articles.data.articles;
 };
