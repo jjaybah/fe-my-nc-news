@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { fetchArticles } from "../utils/api";
 import ArticlesList from "./ArticlesList";
+import { useSearchParams } from "react-router";
 
-function Articles({ topic }) {
+function Articles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isErr, setIsErr] = useState(false);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const topic = searchParams.get("topic");
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,7 +24,10 @@ function Articles({ topic }) {
         console.log(err);
       });
   }, [topic]);
-  return (
+
+  return isLoading ? (
+    <p>Loading...</p>
+  ) : (
     <>
       <ArticlesList articles={articles} />
     </>
