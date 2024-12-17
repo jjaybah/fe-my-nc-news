@@ -13,3 +13,8 @@ export const fetchArticles = async (topic) => {
   const articles = await ncNewsApi.get(url);
   return articles.data.articles;
 };
+
+export const fetchArticleById = async (article_id) => {
+  const article = await ncNewsApi.get(`/articles/${article_id}`);
+  return article.data.article;
+};
