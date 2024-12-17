@@ -1,4 +1,6 @@
 import moment from "moment";
+import { useContext } from "react";
+import { UserContext } from "../contexts/userContext";
 
 export default function formatCustomDate(timestamp) {
   const date = moment(timestamp);
@@ -12,3 +14,7 @@ export default function formatCustomDate(timestamp) {
     return date.format("MMM D, YYYY");
   }
 }
+
+export const useAuthorDisplayName = (articleAuthor, currentUser) => {
+  return articleAuthor === currentUser.username ? "You" : articleAuthor;
+};

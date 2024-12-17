@@ -1,13 +1,17 @@
 import { Link, useParams } from "react-router";
 import { fetchArticleById } from "../utils/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CommentsList from "./CommentsList";
 import moment from "moment";
+import { useAuthorDisplayName } from "../utils/utils";
+import { UserContext } from "../contexts/userContext";
 
 const Article = () => {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { article_id } = useParams();
+  const { user } = useContext(UserContext);
+  const author = useAuthorDisplayName(article.author, user);
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,7 +31,7 @@ const Article = () => {
       </Link>
       <div className="article__header">
         <p>
-          By <span className="author">{article.author}</span>
+          By <span className="author">{author}</span>
         </p>
         <p className="created__at">
           {moment(article.created_at).format("DD MMMM, HH:mm")}

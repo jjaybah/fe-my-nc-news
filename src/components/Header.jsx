@@ -5,12 +5,14 @@ function Header() {
     <>
       <header className="header">
         <nav className="nav__container">
-          <img
-            src="src/assets/NC_logo.png"
-            alt="NC News logo"
-            width="60px"
-            height="60px"
-          />
+          <Link to="/">
+            <img
+              src="src/assets/NC_logo.png"
+              alt="NC News logo"
+              width="60px"
+              height="60px"
+            />
+          </Link>
           <ul className="nav__list">
             <li className="nav__link">
               <Link className="nav__link" to="/articles">

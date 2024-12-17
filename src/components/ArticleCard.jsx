@@ -1,8 +1,13 @@
-import moment from "moment";
-import formatCustomDate from "../utils/utils";
+import formatCustomDate, { useAuthorDisplayName } from "../utils/utils";
 import { Link } from "react-router";
+import { useContext } from "react";
+import { UserContext } from "../contexts/userContext";
 
 const ArticleCard = ({ article }) => {
+  const { user } = useContext(UserContext);
+  const author = useAuthorDisplayName(article.author, user);
+
+  if (article.author === user) author = "You";
   const formattedDate = formatCustomDate(article.created_at);
   return (
     <Link to={`/articles/${article.article_id}`} className="article__link">
@@ -11,7 +16,7 @@ const ArticleCard = ({ article }) => {
         <p>{article.topic}</p>
         <h3>{article.title}</h3>
         <p>{formattedDate}</p>
-        <p>by {article.author}</p>
+        <p>by {author}</p>
         <p>{article.comment_count} comments</p>
         <p>{article.votes} votes</p>
       </div>
