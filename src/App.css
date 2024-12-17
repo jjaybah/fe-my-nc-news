@@ -37,9 +37,17 @@ body {
   color: #c9c9c9;
 }
 
+.articles__title {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+}
+
 .articles__grid {
   display: flex;
   flex-wrap: wrap;
+  margin: auto;
+  max-width: 1280px;
   gap: 1rem;
   justify-content: center;
 }

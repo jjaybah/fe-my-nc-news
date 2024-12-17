@@ -33,6 +33,7 @@ function Articles() {
     )
   ) : (
     <>
+      <h1 className="articles__title">Recent Articles</h1>
       <ArticlesList articles={articles} />
     </>
   );

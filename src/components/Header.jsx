@@ -8,8 +8,8 @@ function Header() {
           <img
             src="src/assets/NC_logo.png"
             alt="NC News logo"
-            width="7%"
-            height="7%"
+            width="60px"
+            height="60px"
           />
           <ul className="nav__list">
             <li className="nav__link">
