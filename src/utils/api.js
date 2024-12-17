@@ -18,3 +18,8 @@ export const fetchArticleById = async (article_id) => {
   const article = await ncNewsApi.get(`/articles/${article_id}`);
   return article.data.article;
 };
+
+export const fetchCommentsByArticleId = async (article_id) => {
+  const comments = await ncNewsApi.get(`/articles/${article_id}/comments`);
+  return comments.data.comments;
+};
