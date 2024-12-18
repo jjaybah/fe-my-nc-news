@@ -7,7 +7,6 @@ const ArticleCard = ({ article }) => {
   const { user } = useContext(UserContext);
   const author = useAuthorDisplayName(article.author, user);
 
-  if (article.author === user) author = "You";
   const formattedDate = formatCustomDate(article.created_at);
   return (
     <Link to={`/articles/${article.article_id}`} className="article__link">
