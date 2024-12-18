@@ -23,3 +23,7 @@ export const fetchCommentsByArticleId = async (article_id) => {
   const comments = await ncNewsApi.get(`/articles/${article_id}/comments`);
   return comments.data.comments;
 };
+
+export const updateArticleByArticleId = async (article_id, vote) => {
+  await ncNewsApi.patch(`/articles/${article_id}`, { inc_votes: vote });
+};

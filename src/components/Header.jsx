@@ -1,4 +1,6 @@
 import { Link } from "react-router";
+import logo from "../assets/NC_logo.png";
+import profilePic from "../assets/profile-picture.png";
 
 function Header() {
   return (
@@ -6,12 +8,7 @@ function Header() {
       <header className="header">
         <nav className="nav__container">
           <Link to="/">
-            <img
-              src="src/assets/NC_logo.png"
-              alt="NC News logo"
-              width="60px"
-              height="60px"
-            />
+            <img src={logo} alt="NC News logo" width="60px" height="60px" />
           </Link>
           <ul className="nav__list">
             <li className="nav__link">
@@ -36,7 +33,7 @@ function Header() {
             </li>
           </ul>
           <img
-            src="src/assets/profile-picture.png"
+            src={profilePic}
             alt="user-profile-picture"
             width="50px"
             height="50px"

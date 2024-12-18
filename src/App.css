@@ -164,6 +164,33 @@ body {
   margin-top: 2rem;
 }
 
+.article__votes {
+  display: flex;
+  align-content: center;
+  max-height: 1.5rem;
+  gap: 0.6rem;
+  background: #e9ecef;
+}
+
+.button__vote {
+  padding: 0 0.5rem;
+  background: #dce4ec;
+  border: none;
+}
+
+.button__vote img {
+  max-height: 1rem;
+  max-width: 1rem;
+  padding: 0.1rem;
+}
+
+.button__vote:hover,
+.button__vote img:hover {
+  cursor: pointer;
+  background: #ced6de;
+  color: black;
+}
+
 .comments__container {
   display: flex;
   flex-direction: column;
