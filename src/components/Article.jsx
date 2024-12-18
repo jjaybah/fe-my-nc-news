@@ -5,6 +5,7 @@ import CommentsList from "./CommentsList";
 import moment from "moment";
 import { useAuthorDisplayName } from "../utils/utils";
 import { UserContext } from "../contexts/userContext";
+import { VotesHandler } from "./VotesHandler";
 
 const Article = () => {
   const [article, setArticle] = useState({});
@@ -41,7 +42,7 @@ const Article = () => {
       <p className="article__body">{article.body}</p>
       <div className="article__footer">
         <p>{article.comment_count} comments</p>
-        <p>{article.votes} votes</p>
+        <VotesHandler article_id={article.article_id} votes={article.votes} />
       </div>
       <CommentsList article_id={article.article_id} key={article.article_id} />
     </div>
