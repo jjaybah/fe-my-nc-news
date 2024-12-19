@@ -11,6 +11,10 @@ body {
   width: 100%;
 }
 
+button {
+  padding: 0.4rem 0.5rem;
+}
+
 .header {
   background: black;
   height: 100px;
@@ -245,4 +249,10 @@ body {
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   font-weight: bold;
+}
+
+.comment__delete {
+  color: #c1121f;
+  margin-left: 2rem;
+  padding: 0.3rem;
 }

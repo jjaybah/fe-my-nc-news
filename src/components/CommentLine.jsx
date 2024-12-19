@@ -2,10 +2,16 @@ import moment from "moment";
 import { useContext } from "react";
 import { UserContext } from "../contexts/userContext";
 import { useAuthorDisplayName } from "../utils/utils";
+import { deleteCommentById } from "../utils/api";
 
-const CommentLine = ({ comment }) => {
+const CommentLine = ({ comment, setIsDeleted }) => {
   const { user } = useContext(UserContext);
   const author = useAuthorDisplayName(comment.author, user);
+
+  const handleDelete = () => {
+    setIsDeleted(true);
+    deleteCommentById(comment.comment_id);
+  };
 
   return (
     <div className="comment__card">
@@ -18,6 +24,11 @@ const CommentLine = ({ comment }) => {
       <p className="comment__body">{comment.body}</p>
       <div className="comment__footer">
         <span className="comment__votes">{comment.votes} 👍 </span>
+        {user.username === comment.author ? (
+          <button className="comment__delete" onClick={handleDelete}>
+            Delete
+          </button>
+        ) : null}
       </div>
     </div>
   );
