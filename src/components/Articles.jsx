@@ -25,12 +25,10 @@ function Articles() {
       });
   }, [topic]);
 
-  return isLoading ? (
-    isErr ? (
-      <p>Loading...</p>
-    ) : (
-      <p>Error</p>
-    )
+  return isErr ? (
+    <p>Error loading articles. Please try again later.</p>
+  ) : isLoading ? (
+    <p>Loading...</p>
   ) : (
     <>
       <h1 className="articles__title">Recent Articles</h1>
