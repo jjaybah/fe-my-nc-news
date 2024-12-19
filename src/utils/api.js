@@ -27,3 +27,16 @@ export const fetchCommentsByArticleId = async (article_id) => {
 export const updateArticleByArticleId = async (article_id, vote) => {
   await ncNewsApi.patch(`/articles/${article_id}`, { inc_votes: vote });
 };
+
+export const postComment = async (article_id, comment, { username }) => {
+  if (comment.trim()) {
+    const newComment = await ncNewsApi.post(
+      `/articles/${article_id}/comments`,
+      {
+        username: username,
+        body: comment,
+      }
+    );
+    return newComment;
+  }
+};
