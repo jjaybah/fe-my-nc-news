@@ -21,7 +21,6 @@ const Article = () => {
       setArticle(article);
     });
   }, [article_id]);
-
   return isLoading ? (
     <p>Loading</p>
   ) : (
