@@ -4,19 +4,17 @@ import { UserContext } from "../contexts/userContext";
 
 export const AddCommentHandler = ({ article_id, setComments, comments }) => {
   const { user } = useContext(UserContext);
-  const [input, setInput] = useState("");
   const [comment, setComment] = useState("");
 
   const handleChange = (e) => {
-    setInput(e.target.value);
-    setComment(input);
+    setComment(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     postComment(article_id, comment, user).then(({ data }) => {
-      setInput("");
       setComments([data.comment, ...comments]);
+      setComment("");
     });
   };
 
@@ -26,7 +24,7 @@ export const AddCommentHandler = ({ article_id, setComments, comments }) => {
         Add comment
         <input
           type="text"
-          value={input}
+          value={comment}
           onChange={handleChange}
           className="add-comment-input"
         ></input>
