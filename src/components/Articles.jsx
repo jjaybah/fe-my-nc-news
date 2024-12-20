@@ -12,14 +12,18 @@ function Articles() {
   const [sort_by, setSortBy] = useState(
     searchParams.get("sort_by") || "created_at"
   );
+  const [order, setOrder] = useState(searchParams.get("order") || "desc");
 
   const handleChange = (e) => {
-    setSortBy(e.target.value);
-    setSearchParams({ sort_by: e.target.value });
+    const sort = e.target.value.split(",")[0];
+    const order = e.target.value.split(",")[1];
+    setSortBy(sort);
+    setOrder(order);
+    setSearchParams({ sort_by: sort, order: order });
   };
   useEffect(() => {
     setIsLoading(true);
-    fetchArticles(topic, sort_by)
+    fetchArticles(topic, sort_by, order)
       .then((articles) => {
         setIsLoading(false);
         setArticles(articles);
@@ -29,7 +33,7 @@ function Articles() {
         setIsErr(true);
         console.log(err);
       });
-  }, [topic, sort_by]);
+  }, [topic, sort_by, order]);
 
   return isErr ? (
     <p>Error loading articles. Please try again later.</p>
@@ -39,10 +43,21 @@ function Articles() {
     <>
       <h1 className="articles__title">Recent Articles</h1>
       <label htmlFor="sortBy">Sort articles</label>
-      <select name="sort_by" value={sort_by} onChange={handleChange}>
-        <option value="created_at">Date</option>
-        <option value="votes">Votes</option>
-        <option value="comment_count">Comment count</option>
+      <select
+        name="sort_by"
+        value={`${sort_by},${order}`}
+        onChange={handleChange}
+      >
+        <option value="created_at,desc">{`Date (Newest First)`}</option>
+        <option value="created_at,asc">{`Date (Oldest First)`}</option>
+        <option value="votes,desc">{`Votes (High to Low)`}</option>
+        <option value="votes,asc">{`Votes (Low to High)`}</option>
+        <option value="comment_count,desc">
+          {`Comment count (Hight to Low)`}
+        </option>
+        <option value="comment_count,asc">
+          {`Comment count (Low to High)`}
+        </option>
       </select>
       <ArticlesList articles={articles} />
     </>
