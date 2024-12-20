@@ -17,17 +17,17 @@ function Header() {
               </Link>
             </li>
             <li className="nav__link">
-              <Link className="nav__link" to="/articles?topic=coding">
+              <Link className="nav__link" to="/topics/coding">
                 Coding
               </Link>
             </li>
             <li className="nav__link">
-              <Link className="nav__link" to="/articles?topic=football">
+              <Link className="nav__link" to="/topics/football">
                 Football
               </Link>
             </li>
             <li className="nav__link">
-              <Link className="nav__link" to="/articles?topic=cooking">
+              <Link className="nav__link" to="/topics/cooking">
                 Cooking
               </Link>
             </li>
