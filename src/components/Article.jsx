@@ -26,9 +26,9 @@ const Article = () => {
   ) : (
     <div className="article__container">
       <h1>{article.title}</h1>
-      <Link className="header__tag" to={`/articles?topic=${article.topic}`}>
-        <p className="tag">{article.topic}</p>
-      </Link>
+      {/* <Link className="header__tag" to={`/articles?topic=${article.topic}`}> */}
+      <p className="tag">{article.topic}</p>
+      {/* </Link> */}
       <div className="article__header">
         <p>
           By <span className="author">{author}</span>
