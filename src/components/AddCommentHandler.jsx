@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { postComment } from "../utils/api";
-import { UserContext } from "../contexts/userContext";
+import { UserContext } from "../contexts/UserContext";
 
 export const AddCommentHandler = ({ article_id, setComments, comments }) => {
   const { user } = useContext(UserContext);
@@ -19,7 +19,11 @@ export const AddCommentHandler = ({ article_id, setComments, comments }) => {
   };
 
   return (
-    <form className="add-comment-form" onSubmit={handleSubmit}>
+    <form
+      className="add-comment-form"
+      onSubmit={handleSubmit}
+      id="add-comment-form"
+    >
       <label className="add-comment-label">
         Add comment
         <input
