@@ -35,22 +35,24 @@ export const VotesHandler = ({ article_id, votes }) => {
 
   return (
     <span className="article__votes">
-      <button className="button__vote">
-        <img
-          src={voteDown}
-          alt="arrow down to reduce votes"
-          onClick={handleClick}
-          name="-1"
-        />
-      </button>
-      <span>{votesCount}</span>
-      <button className="button__vote">
-        <img
+      <button className="button__vote" onClick={handleClick} name="+1">
+        +
+        {/* <img
           src={voteUp}
           alt="arrow up to add votes"
           onClick={handleClick}
           name="+1"
-        />
+        /> */}
+      </button>
+      <span>{votesCount}</span>
+      <button className="button__vote" onClick={handleClick} name="-1">
+        -
+        {/* <img
+          src={voteDown}
+          alt="arrow down to reduce votes"
+          onClick={handleClick}
+          name="-1"
+        /> */}
       </button>
       {isErr ? <p>{isErr}</p> : null}
     </span>
