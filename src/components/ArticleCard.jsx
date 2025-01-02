@@ -1,7 +1,7 @@
 import formatCustomDate, { useAuthorDisplayName } from "../utils/utils";
 import { Link } from "react-router";
 import { useContext } from "react";
-import { UserContext } from "../contexts/userContext";
+import { UserContext } from "../contexts/UserContext";
 
 const ArticleCard = ({ article }) => {
   const { user } = useContext(UserContext);

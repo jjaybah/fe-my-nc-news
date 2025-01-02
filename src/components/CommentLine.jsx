@@ -1,6 +1,6 @@
 import moment from "moment";
 import { useContext } from "react";
-import { UserContext } from "../contexts/userContext";
+import { UserContext } from "../contexts/UserContext";
 import { useAuthorDisplayName } from "../utils/utils";
 import { deleteCommentById } from "../utils/api";
 
