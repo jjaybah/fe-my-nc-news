@@ -180,6 +180,7 @@ button {
   padding: 0 0.5rem;
   background: #dce4ec;
   border: none;
+  font-size: 1rem;
 }
 
 .button__vote img {
@@ -255,4 +256,28 @@ button {
   color: #c1121f;
   margin-left: 2rem;
   padding: 0.3rem;
+}
+
+.err__wrapper {
+  max-width: 390px;
+  width: 100%;
+  height: 390px;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+.err__status {
+  text-align: center;
+  color: #000000;
+  font-size: 100px;
+  margin-bottom: 0px;
+  font-weight: 800;
+}
+
+.err__msg {
+  text-align: center;
+  color: #000000;
+  font-size: 30px;
+  font-weight: 400;
+  margin: 0px auto 30px auto;
 }

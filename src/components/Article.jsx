@@ -4,24 +4,35 @@ import { useContext, useEffect, useState } from "react";
 import CommentsList from "./CommentsList";
 import moment from "moment";
 import { useAuthorDisplayName } from "../utils/utils";
-import { UserContext } from "../contexts/userContext";
+import { UserContext } from "../contexts/UserContext";
 import { VotesHandler } from "./VotesHandler";
 
 const Article = () => {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(null);
   const { article_id } = useParams();
   const { user } = useContext(UserContext);
   const author = useAuthorDisplayName(article.author, user);
 
   useEffect(() => {
     setIsLoading(true);
-    fetchArticleById(article_id).then((article) => {
-      setIsLoading(false);
-      setArticle(article);
-    });
+    fetchArticleById(article_id)
+      .then((article) => {
+        setIsLoading(false);
+        setArticle(article);
+      })
+      .catch((err) => {
+        setIsError(err);
+        console.log(err.response, "err in catch");
+      });
   }, [article_id]);
-  return isLoading ? (
+  return isError ? (
+    <div className="err__wrapper">
+      <p className="err__status">{isError.response.status}</p>
+      <p className="err__msg">{isError.response.data.msg}</p>
+    </div>
+  ) : isLoading ? (
     <p>Loading</p>
   ) : (
     <div className="article__container">
