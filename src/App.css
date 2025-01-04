@@ -269,7 +269,7 @@ button {
 .err__status {
   text-align: center;
   color: #000000;
-  font-size: 100px;
+  font-size: 70px;
   margin-bottom: 0px;
   font-weight: 800;
 }
@@ -277,7 +277,7 @@ button {
 .err__msg {
   text-align: center;
   color: #000000;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 400;
   margin: 0px auto 30px auto;
 }
