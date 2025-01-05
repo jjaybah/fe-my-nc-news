@@ -1,43 +1,67 @@
 import { useEffect, useState } from "react";
-import { fetchCommentsByArticleId } from "../utils/api";
+import { fetchCommentsByArticleId, deleteCommentById } from "../utils/api";
 import CommentLine from "./CommentLine";
 import { AddCommentHandler } from "./AddCommentHandler";
 
-const CommentsList = ({ article_id }) => {
+const CommentsList = ({ article_id, updateCommentCount }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [isError, setIsError] = useState(null);
+
+  const handleDelete = (comment_id) => {
+    const originalComments = [...comments];
+
+    setComments((currComments) =>
+      currComments.filter((comment) => comment.comment_id !== comment_id)
+    );
+    updateCommentCount(-1);
+
+    deleteCommentById(comment_id).catch(() => {
+      alert("Failed to delete the comment. Please try again.");
+      setComments(originalComments);
+      updateCommentCount(1);
+    });
+  };
 
   useEffect(() => {
     if (!article_id) return;
 
     setIsLoading(true);
-    fetchCommentsByArticleId(article_id).then((comments) => {
-      setIsLoading(false);
-      setComments(comments);
-      setIsDeleted(false);
-    });
-  }, [article_id, isDeleted]);
+    setIsError(null);
 
-  return isLoading ? (
-    <p>Loading...</p>
-  ) : (
+    fetchCommentsByArticleId(article_id)
+      .then((comments) => {
+        setIsLoading(false);
+        setComments(comments);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setIsError("Failed to fetch comments. Please try again later.");
+        console.error(err);
+      });
+  }, [article_id]);
+
+  if (isLoading) return <p>Loading...</p>;
+
+  if (isError) return <p className="error">{isError}</p>;
+
+  return (
     <section>
       <AddCommentHandler
         article_id={article_id}
         setComments={setComments}
         comments={comments}
+        updateCommentCount={updateCommentCount}
       />
       <ul className="comments__container">
-        {comments.map((comment) => {
-          return (
-            <CommentLine
-              key={comment.comment_id}
-              comment={comment}
-              setIsDeleted={setIsDeleted}
-            />
-          );
-        })}
+        {comments.map((comment) => (
+          <CommentLine
+            key={comment.comment_id}
+            comment={comment}
+            onDelete={handleDelete}
+            updateCommentCount={updateCommentCount}
+          />
+        ))}
       </ul>
     </section>
   );
