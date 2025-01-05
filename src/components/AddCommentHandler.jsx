@@ -49,7 +49,7 @@ export const AddCommentHandler = ({
           disabled={isPosting}
         />
       </label>
-      <button type="submit" disabled={isPosting}>
+      <button className="post__comment__btn" type="submit" disabled={isPosting}>
         Post
       </button>
     </form>
