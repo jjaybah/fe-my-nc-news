@@ -281,6 +281,7 @@ body.menu-open .article__container {
 
 .comment__header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   font-size: 0.9rem;
@@ -290,10 +291,12 @@ body.menu-open .article__container {
 
 .comment__author {
   color: #14213d;
+  margin-right: 1rem;
 }
 
 .comment__created {
   color: #888;
+  white-space: nowrap;
 }
 
 .comment__body {
@@ -307,6 +310,25 @@ body.menu-open .article__container {
   justify-content: flex-start;
   font-size: 0.9rem;
   color: #555;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .comment__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .comment__author,
+  .comment__created {
+    margin-bottom: 0.5rem;
+  }
+
+  .comment__footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .comment__votes {
