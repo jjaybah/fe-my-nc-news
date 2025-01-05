@@ -10,7 +10,7 @@ export const AddCommentHandler = ({
 }) => {
   const { user } = useContext(UserContext);
   const [comment, setComment] = useState("");
-  const [isError, setIsError] = useState(null);
+  const [isPosting, setIsPosting] = useState(false);
 
   const handleChange = (e) => {
     setComment(e.target.value);
@@ -18,14 +18,18 @@ export const AddCommentHandler = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsPosting(true);
+
     postComment(article_id, comment, user)
       .then(({ data }) => {
         setComments([data.comment, ...comments]);
         setComment("");
         updateCommentCount(1);
+        setIsPosting(false);
       })
       .catch((err) => {
         alert("Failed to post the comment. Please try again later.");
+        setIsPosting(false);
       });
   };
 
@@ -42,9 +46,12 @@ export const AddCommentHandler = ({
           value={comment}
           onChange={handleChange}
           className="add-comment-input"
-        ></input>
+          disabled={isPosting}
+        />
       </label>
-      <button type="submit">Post</button>
+      <button type="submit" disabled={isPosting}>
+        Post
+      </button>
     </form>
   );
 };
