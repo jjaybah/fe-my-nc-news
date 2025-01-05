@@ -1,5 +1,6 @@
 function DeleteComment({ comment_id, onDelete }) {
-  function handleDelete() {
+  function handleDelete(e) {
+    e.prefentDefault();
     if (confirm("Are you sure you want to delete this comment?")) {
       onDelete(comment_id);
     }
