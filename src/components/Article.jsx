@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import { fetchArticleById } from "../utils/api";
 import { useContext, useEffect, useState } from "react";
 import CommentsList from "./CommentsList";
@@ -9,37 +9,50 @@ import { VotesHandler } from "./VotesHandler";
 
 const Article = () => {
   const [article, setArticle] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(null);
   const { article_id } = useParams();
   const { user } = useContext(UserContext);
-  const author = useAuthorDisplayName(article.author, user);
+  const author = useAuthorDisplayName(article.author || "", user);
+  const [commentCount, setCommentCount] = useState(article.comment_count || 0);
+
+  const updateCommentCount = (newCount) => {
+    setCommentCount((currCount) => currCount + newCount);
+  };
 
   useEffect(() => {
     setIsLoading(true);
     fetchArticleById(article_id)
-      .then((article) => {
+      .then((fetchedArticle) => {
+        setArticle(fetchedArticle);
+        setCommentCount(fetchedArticle.comment_count);
         setIsLoading(false);
-        setArticle(article);
       })
       .catch((err) => {
         setIsError(err);
-        console.log(err.response, "err in catch");
+        setIsLoading(false);
       });
   }, [article_id]);
-  return isError ? (
-    <div className="err__wrapper">
-      <p className="err__status">{isError.response.status}</p>
-      <p className="err__msg">{isError.response.data.msg}</p>
-    </div>
-  ) : isLoading ? (
-    <p>Loading</p>
-  ) : (
+
+  if (isError) {
+    return (
+      <div className="err__wrapper">
+        <p className="err__status">{isError.response?.status}</p>
+        <p className="err__msg">
+          {isError.response?.data?.msg || "An error occurred"}
+        </p>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  return (
     <div className="article__container">
       <h1>{article.title}</h1>
-      {/* <Link className="header__tag" to={`/articles?topic=${article.topic}`}> */}
       <p className="tag">{article.topic}</p>
-      {/* </Link> */}
       <div className="article__header">
         <p>
           By <span className="author">{author}</span>
@@ -51,10 +64,14 @@ const Article = () => {
       <img src={article.article_img_url} alt="" />
       <p className="article__body">{article.body}</p>
       <div className="article__footer">
-        <p>{article.comment_count} comments</p>
+        <p>{commentCount} comments</p>
         <VotesHandler article_id={article.article_id} votes={article.votes} />
       </div>
-      <CommentsList article_id={article.article_id} key={article.article_id} />
+      <CommentsList
+        article_id={article.article_id}
+        updateCommentCount={updateCommentCount}
+        key={article.article_id}
+      />
     </div>
   );
 };

@@ -2,9 +2,15 @@ import { useContext, useState } from "react";
 import { postComment } from "../utils/api";
 import { UserContext } from "../contexts/UserContext";
 
-export const AddCommentHandler = ({ article_id, setComments, comments }) => {
+export const AddCommentHandler = ({
+  article_id,
+  setComments,
+  comments,
+  updateCommentCount,
+}) => {
   const { user } = useContext(UserContext);
   const [comment, setComment] = useState("");
+  const [isError, setIsError] = useState(null);
 
   const handleChange = (e) => {
     setComment(e.target.value);
@@ -12,10 +18,15 @@ export const AddCommentHandler = ({ article_id, setComments, comments }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(article_id, comment, user).then(({ data }) => {
-      setComments([data.comment, ...comments]);
-      setComment("");
-    });
+    postComment(article_id, comment, user)
+      .then(({ data }) => {
+        setComments([data.comment, ...comments]);
+        setComment("");
+        updateCommentCount(1);
+      })
+      .catch((err) => {
+        alert("Failed to post the comment. Please try again later.");
+      });
   };
 
   return (

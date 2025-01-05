@@ -6,8 +6,8 @@ import { UserContext } from "../contexts/UserContext";
 const ArticleCard = ({ article }) => {
   const { user } = useContext(UserContext);
   const author = useAuthorDisplayName(article.author, user);
-
   const formattedDate = formatCustomDate(article.created_at);
+
   return (
     <Link to={`/articles/${article.article_id}`} className="article__link">
       <div className="card__container">
