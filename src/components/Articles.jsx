@@ -42,23 +42,26 @@ function Articles() {
   ) : (
     <>
       <h1 className="articles__title">Recent Articles</h1>
-      <label htmlFor="sortBy">Sort articles</label>
-      <select
-        name="sort_by"
-        value={`${sort_by},${order}`}
-        onChange={handleChange}
-      >
-        <option value="created_at,desc">{`Date (Newest First)`}</option>
-        <option value="created_at,asc">{`Date (Oldest First)`}</option>
-        <option value="votes,desc">{`Votes (High to Low)`}</option>
-        <option value="votes,asc">{`Votes (Low to High)`}</option>
-        <option value="comment_count,desc">
-          {`Comment count (Hight to Low)`}
-        </option>
-        <option value="comment_count,asc">
-          {`Comment count (Low to High)`}
-        </option>
-      </select>
+      <div className="articles__grid">
+        <label htmlFor="sortBy">Sort articles</label>
+        <select
+          name="sort_by"
+          value={`${sort_by},${order}`}
+          onChange={handleChange}
+          className="sort__articles__dropdown"
+        >
+          <option value="created_at,desc">{`Date (Newest First)`}</option>
+          <option value="created_at,asc">{`Date (Oldest First)`}</option>
+          <option value="votes,desc">{`Votes (High to Low)`}</option>
+          <option value="votes,asc">{`Votes (Low to High)`}</option>
+          <option value="comment_count,desc">
+            {`Comment count (Hight to Low)`}
+          </option>
+          <option value="comment_count,asc">
+            {`Comment count (Low to High)`}
+          </option>
+        </select>
+      </div>
       <ArticlesList articles={articles} />
     </>
   );

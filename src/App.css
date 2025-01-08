@@ -101,6 +101,8 @@ body.menu-open .article__container {
   padding-top: 40px;
 }
 
+
+
 .article__container {
   margin-top: 0;
   transition: margin-top 0.3s ease;
@@ -119,6 +121,14 @@ body.menu-open .article__container {
   max-width: 1280px;
   gap: 1rem;
   justify-content: center;
+}
+
+.sort__articles__dropdown {
+  margin-bottom: 2rem;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 .card__container:nth-last-child(n + 1) {
