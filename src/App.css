@@ -19,6 +19,22 @@ button {
   padding: 0.4rem 0.5rem;
 }
 
+.home__page__content {
+  display: flex;
+  flex-direction: column;
+  margin: 5rem auto;
+  text-align: center;
+}
+
+.home__page__content h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.home__page__content p {
+  margin-bottom: 0.5rem;
+}
+
 .header {
   background: black;
   height: 100px;
@@ -102,8 +118,6 @@ body.menu-open .article__container {
   margin-top: 250px;
   padding-top: 40px;
 }
-
-
 
 .article__container {
   margin-top: 0;
