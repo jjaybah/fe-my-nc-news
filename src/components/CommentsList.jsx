@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchCommentsByArticleId, deleteCommentById } from "../utils/api";
 import CommentLine from "./CommentLine";
 import { AddCommentHandler } from "./AddCommentHandler";
+import Loading from "./Loading";
 
 const CommentsList = ({ article_id, updateCommentCount }) => {
   const [comments, setComments] = useState([]);
@@ -41,7 +42,7 @@ const CommentsList = ({ article_id, updateCommentCount }) => {
       });
   }, [article_id]);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
 
   if (isError) return <p className="error">{isError}</p>;
 

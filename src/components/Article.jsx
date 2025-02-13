@@ -6,6 +6,7 @@ import moment from "moment";
 import { useAuthorDisplayName } from "../utils/utils";
 import { UserContext } from "../contexts/UserContext";
 import { VotesHandler } from "./VotesHandler";
+import Loading from "./Loading";
 
 const Article = () => {
   const [article, setArticle] = useState({});
@@ -46,7 +47,7 @@ const Article = () => {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return (

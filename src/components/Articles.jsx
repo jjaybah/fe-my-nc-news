@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchArticles } from "../utils/api";
 import ArticlesList from "./ArticlesList";
 import { useParams, useSearchParams } from "react-router";
+import Loading from "./Loading";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
@@ -13,6 +14,7 @@ function Articles() {
     searchParams.get("sort_by") || "created_at"
   );
   const [order, setOrder] = useState(searchParams.get("order") || "desc");
+  const [page, setPage] = useState(1);
 
   const handleChange = (e) => {
     const sort = e.target.value.split(",")[0];
@@ -23,7 +25,7 @@ function Articles() {
   };
   useEffect(() => {
     setIsLoading(true);
-    fetchArticles(topic, sort_by, order)
+    fetchArticles(topic, sort_by, order, page)
       .then((articles) => {
         setIsLoading(false);
         setArticles(articles);
@@ -33,36 +35,54 @@ function Articles() {
         setIsErr(true);
         console.log(err);
       });
-  }, [topic, sort_by, order]);
+  }, [topic, sort_by, order, page]);
 
   return isErr ? (
     <p>Error loading articles. Please try again later.</p>
   ) : isLoading ? (
-    <p>Loading...</p>
+    <Loading />
   ) : (
     <>
       <h1 className="articles__title">Recent Articles</h1>
       <div className="articles__grid">
-        <label htmlFor="sortBy">Sort articles</label>
-        <select
-          name="sort_by"
-          value={`${sort_by},${order}`}
-          onChange={handleChange}
-          className="sort__articles__dropdown"
-        >
-          <option value="created_at,desc">{`Date (Newest First)`}</option>
-          <option value="created_at,asc">{`Date (Oldest First)`}</option>
-          <option value="votes,desc">{`Votes (High to Low)`}</option>
-          <option value="votes,asc">{`Votes (Low to High)`}</option>
-          <option value="comment_count,desc">
-            {`Comment count (Hight to Low)`}
-          </option>
-          <option value="comment_count,asc">
-            {`Comment count (Low to High)`}
-          </option>
-        </select>
+        <div className="sort__articles__container">
+          <label htmlFor="sortBy">Sort By</label>
+          <select
+            name="sort_by"
+            value={`${sort_by},${order}`}
+            onChange={handleChange}
+            className="sort__articles__dropdown"
+          >
+            <option value="created_at,desc">{`Date (Newest First)`}</option>
+            <option value="created_at,asc">{`Date (Oldest First)`}</option>
+            <option value="votes,desc">{`Votes (High to Low)`}</option>
+            <option value="votes,asc">{`Votes (Low to High)`}</option>
+            <option value="comment_count,desc">
+              {`Comment count (Hight to Low)`}
+            </option>
+            <option value="comment_count,asc">
+              {`Comment count (Low to High)`}
+            </option>
+          </select>
+        </div>
       </div>
       <ArticlesList articles={articles} />
+      <div className="articles__pagination">
+        <button
+          className="pagination__button"
+          onClick={() => setPage((currentPage) => currentPage - 1)}
+          disabled={page === 1}
+        >
+          Previous
+        </button>
+        <button
+          className="pagination__button"
+          onClick={() => setPage((currentPage) => currentPage + 1)}
+          disabled={9 * page >= 37}
+        >
+          Next
+        </button>
+      </div>
     </>
   );
 }
