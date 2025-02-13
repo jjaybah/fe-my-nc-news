@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 import logo from "../assets/NC_logo.png";
 import profilePic from "../assets/profile-picture.png";
 
@@ -21,34 +21,62 @@ function Header() {
   return (
     <header className="header">
       <nav className="nav__container">
-        <Link to="/">
+        <NavLink to="/">
           <img src={logo} alt="NC News logo" width="60px" height="60px" />
-        </Link>
+        </NavLink>
 
         <button className="hamburger" onClick={toggleMenu}>
           &#9776;
         </button>
 
         <ul className={`nav__list ${isMenuOpen ? "open" : ""}`}>
-          <li className="nav__link">
-            <Link className="nav__link" to="/articles">
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav__link__active" : "nav__link"
+              }
+              to="/articles"
+              end
+              onClick={() => setIsMenuOpen(false)}
+            >
               All News
-            </Link>
+            </NavLink>
           </li>
-          <li className="nav__link">
-            <Link className="nav__link" to="/topics/coding">
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav__link__active" : "nav__link"
+              }
+              to="/topics/coding"
+              end
+              onClick={() => setIsMenuOpen(false)}
+            >
               Coding
-            </Link>
+            </NavLink>
           </li>
-          <li className="nav__link">
-            <Link className="nav__link" to="/topics/football">
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav__link__active" : "nav__link"
+              }
+              to="/topics/football"
+              end
+              onClick={() => setIsMenuOpen(false)}
+            >
               Football
-            </Link>
+            </NavLink>
           </li>
-          <li className="nav__link">
-            <Link className="nav__link" to="/topics/cooking">
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav__link__active" : "nav__link"
+              }
+              to="/topics/cooking"
+              end
+              onClick={() => setIsMenuOpen(false)}
+            >
               Cooking
-            </Link>
+            </NavLink>
           </li>
         </ul>
 
